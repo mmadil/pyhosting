@@ -12,12 +12,36 @@ users = ['adil',]
 
 # Helper functions 
 
-def Raise404(*args):
+def Raise404():
     try:
-        file = open('')
-        pass
+        file = open('404.html', 'rU')
+        page = file.read()
+        return page
     except IOError:
-        pass
+        print "Please create a 404.html"
+        return "<h1>404 - Page not found </h1>"
+
+
+def ReadPage(*args):
+    print args
+    print len(args)
+    if len(args) == 1:
+        try:
+            file = open('profiles/' + str(args[0]) + '/index.html', 'rU')
+            page = file.read()
+            return page
+        except IOError:
+            return Raise404()
+
+    if len(args) == 2:
+        try:
+            file = open('profiles/' + str(args[0] + '/' + str(args[1])), 'rU')
+            page = file.read()
+            return page
+        except IOError:
+            return Raise404()
+
+
 
 # Route for Main Home page.
 
@@ -33,14 +57,9 @@ def Homepage():
 @route('/<name>')
 def UserHomePage(name):
     if name in users:
-        try:
-            file = open('profiles/'+ str(name)+'/index.html', 'rU')
-            page = file.read()
-            return page
-        except IOError:
-            return "404"
+        return ReadPage(name)
     else:
-        return "404"
+        return Raise404()
 
 
 
@@ -50,14 +69,9 @@ def UserHomePage(name):
 @route('/<name>/<page>')
 def UserOtherPages(name, page):
     if name in users:
-        try:
-            file = open('profiles/' + str(name) + '/'+ str(page), 'rU')
-            page = file.read()
-            return page
-        except IOError:
-            return "404"
+        return ReadPage(name, page)
     else:
-        return "404"
+        return Raise404()
 
 
 
