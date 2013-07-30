@@ -23,8 +23,14 @@ def Raise404():
 
 
 def ReadPage(*args):
-    print args
-    print len(args)
+    if len(args) == 0:
+        try:
+            file = open('templates/index.html', 'rU')
+            page = file.read()
+            return page
+        except IOError:
+            return Raise404()
+
     if len(args) == 1:
         try:
             file = open('profiles/' + str(args[0]) + '/index.html', 'rU')
@@ -47,8 +53,7 @@ def ReadPage(*args):
 
 @route('/')
 def Homepage():
-    return "Welcome this is Home screen"
-
+    return ReadPage()
 
 
 # Route for Users Home page
@@ -82,8 +87,8 @@ try:
 except ImportError:
     pass
 
-# Heroku uses different settings than the one developed
-# locally
+
+# Heroku uses different settings
 
 if local:
     run(host='127.0.0.1', port=8000, debug=True)
