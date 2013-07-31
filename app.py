@@ -2,6 +2,7 @@
 
 from bottle import route, run
 from sys import argv
+from jinja2 import Template
 
 
 # Some settings necessary for deploying app to heroku
@@ -14,7 +15,7 @@ users = ['adil',]
 
 def Raise404():
     try:
-        file = open('404.html', 'rU')
+        file = open('templates/404.html', 'rU')
         page = file.read()
         return page
     except IOError:
@@ -27,6 +28,8 @@ def ReadPage(*args):
         try:
             file = open('templates/index.html', 'rU')
             page = file.read()
+            template = Template(page)
+            page = template.render(users = '1')
             return page
         except IOError:
             return Raise404()
