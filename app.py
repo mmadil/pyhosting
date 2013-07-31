@@ -1,6 +1,7 @@
 # Imports
 
 from bottle import route, run
+from bottle import jinja2_template
 from sys import argv
 from jinja2 import Template
 
@@ -28,8 +29,8 @@ def ReadPage(*args):
         try:
             file = open('templates/index.html', 'rU')
             page = file.read()
-            template = Template(page)
-            page = template.render(users = '1')
+            context = {'users': len(users),}
+            page = jinja2_template(page, context)
             return page
         except IOError:
             return Raise404()
