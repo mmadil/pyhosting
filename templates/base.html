@@ -73,23 +73,15 @@
       <hr>
 
       <div class="jumbotron">
-	<div class="header">
-        	<h1>PyHosting</h1>
-        	<p class="lead">Static hosting made easy.</p>
-	</div>
-	<div class="about">
-		<h1>About</h1>
-		<p class="lead">About Us</p>
-	</div>
-	<div class="contact">
-		<h1>Contact us here</h1>
-		<p class="lead">Here</p>
-	</div>
+        {% block header %}
+        {% endblock header %}
       </div>
 
       <hr>
 
       <div class="row-fluid marketing">
+        {% block content %}
+        {% endblock content %}
       </div>
 
       <hr>

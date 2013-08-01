@@ -20,7 +20,7 @@ def Raise404():
         file = open('templates/404.html', 'rU')
         page = file.read()
         context = {'STATIC_URL': STATIC_URL,}
-        page = jinja2_template(page)
+        page = jinja2_template(page, context)
         return page
     except IOError:
         print "Please create a 404.html"
