@@ -18,6 +18,7 @@ def Raise404():
     try:
         file = open('templates/404.html', 'rU')
         page = file.read()
+        page = jinja2_template(page)
         return page
     except IOError:
         print "Please create a 404.html"

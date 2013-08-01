@@ -1,4 +1,11 @@
 {% extends 'templates/base.html' %}
 
+{% block title %}Home {% endblock title %}
+
 {% block content %}
+{% if users == 1 %}
+We have {{ users }} user.
+{% else %}
+We have {{ users }} users.
+{% endif %}
 {% endblock %}
