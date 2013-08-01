@@ -1,6 +1,6 @@
 # Imports
 
-from bottle import route, run
+from bottle import route, run, static_file
 from bottle import jinja2_template
 from sys import argv
 from jinja2 import Template
@@ -11,6 +11,7 @@ from jinja2 import Template
 
 local = False
 users = ['adil',]
+STATIC_URL = 'https://googledrive.com/host/0B-gIhJMz12Bta21xOFVKc3ZWWEk/'
 
 # Helper functions 
 
@@ -18,6 +19,7 @@ def Raise404():
     try:
         file = open('templates/404.html', 'rU')
         page = file.read()
+        context = {'STATIC_URL': STATIC_URL,}
         page = jinja2_template(page)
         return page
     except IOError:
@@ -30,7 +32,7 @@ def ReadPage(*args):
         try:
             file = open('templates/index.html', 'rU')
             page = file.read()
-            context = {'users': len(users),}
+            context = {'STATIC_URL': STATIC_URL, 'users': len(users),}
             page = jinja2_template(page, context)
             return page
         except IOError:
@@ -86,6 +88,7 @@ def UserOtherPages(name, page):
 
 
 # Usage is only when developing locally.
+# local_settings.py has local = True
 
 try:
     from local_settings import local
@@ -96,8 +99,8 @@ except ImportError:
 # Heroku uses different settings
 
 if local:
-    run(host='127.0.0.1', port=8000, debug=True)
+    run(host='127.0.0.1', port=8000, debug=True, reloader=True)
 else:
-    run(host='0.0.0.0', port=argv[1], debug=False)
+    run(host='0.0.0.0', port=argv[1], debug=False, reloader=true)
 
 
