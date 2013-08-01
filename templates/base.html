@@ -47,6 +47,8 @@
       }
       .contact { display: none;}
       .about { display: none;}
+    {% block extrastyle %}
+    {% endblock extrastyle %}
     </style>
     <link href="{{ STATIC_URL }}css/bootstrap-responsive.css" rel="stylesheet">
 
@@ -63,9 +65,9 @@
 
       <div class="masthead">
         <ul class="nav nav-pills pull-right">
-          <li class="active"><a id="home" href="#home">Home</a></li>
-	        <li><a id="about" href="#about">About</a></li>
-          <li><a id="contact" href="#contact">Contact</a></li>
+          <li class="{% block isindex %}{% endblock isindex%}"><a id="home" href="/">Home</a></li>
+          {% block nav %}
+          {% endblock nav%}
         </ul>
         <h3 class="muted">PyHosting</h3>
       </div>
@@ -91,8 +93,8 @@
       </div>
 
     </div> <!-- /container -->
-    <script src="{{ STATIC_URL }}js/vendor/jquery-1.9.1.min.js"></script>
-    <script src="{{ STATIC_URL }}js/application.js"></script>
+    {% block jquery %}
+    {% endblock jquery %}
   </body>
 </html>
 

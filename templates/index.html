@@ -16,5 +16,19 @@
 	      </div>
 {% endblock header %}
 
+{% block isindex %}active{% endblock isindex%}
+
+{% block nav %}
+       <li><a id="about" href="#about">About</a></li>
+       <li><a id="contact" href="#contact">Contact</a></li>
+{% endblock nav%}
+
+
 {% block content %}
 {% endblock content %}
+
+{% block jquery %}
+<script src="{{ STATIC_URL }}js/vendor/jquery-1.9.1.min.js"></script>
+<script src="{{ STATIC_URL }}js/application.js"></script>
+{% endblock jquery %}
+
