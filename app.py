@@ -101,6 +101,6 @@ except ImportError:
 if local:
     run(host='127.0.0.1', port=8000, debug=True, reloader=True)
 else:
-    run(host='0.0.0.0', port=argv[1], debug=False, reloader=true)
+    run(host='0.0.0.0', port=argv[1], debug=False, reloader=True)
 
 
