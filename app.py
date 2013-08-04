@@ -10,7 +10,10 @@ from jinja2 import Template
 # and users that be using this project to upload their pages.
 
 local = False
-users = ['adil',]
+users = {
+    'adil': ['Mohammad Adil'],
+    }
+
 STATIC_URL = 'https://googledrive.com/host/0B-gIhJMz12Bta21xOFVKc3ZWWEk/'
 
 # Helper functions 
@@ -32,7 +35,7 @@ def ReadPage(*args):
         try:
             file = open('templates/index.html', 'rU')
             page = file.read()
-            context = {'STATIC_URL': STATIC_URL, 'users': len(users),}
+            context = {'STATIC_URL': STATIC_URL, 'users_len': len(users), 'users': users}
             page = jinja2_template(page, context)
             return page
         except IOError:
